@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Year One</title>
+<title>YEAR ONE</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
 
@@ -20,67 +20,202 @@ font-family:'Pixelify Sans',sans-serif;
 body{
 background:#120204;
 color:white;
-overflow:hidden;
-position:relative;
+overflow-y:auto;
+overflow-x:hidden;
+transition:background 1s ease;
 }
 
 .screen{
 width:100vw;
-height:100vh;
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
 padding:30px;
 text-align:center;
+position:relative;
 }
 
 .hidden{
 display:none;
 }
 
+h1{
+margin-bottom:15px;
+}
+
 input{
+width:280px;
 padding:12px;
 margin:10px;
-width:260px;
 border:none;
-border-radius:8px;
+border-radius:10px;
+font-size:16px;
 }
 
 button{
 padding:12px 20px;
-margin-top:15px;
-cursor:pointer;
+margin:10px;
 border:none;
-border-radius:8px;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
 }
 
 .chapter{
 max-width:900px;
+z-index:5;
+position:relative;
+}
+
+.troggy{
+font-size:90px;
+margin-bottom:20px;
+}
+
+#chapterTitle{
+font-size:2.3rem;
+margin-bottom:20px;
+}
+
+#chapterContent{
+font-size:1.15rem;
+line-height:1.8;
+white-space:pre-wrap;
+}
+#moonContainer{
+margin-top:25px;
+}
+
+#moon{
+font-size:120px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#moon:hover{
+transform:scale(1.08);
+}
+
+#moonText{
+margin-top:20px;
+font-size:1.1rem;
+line-height:1.8;
+white-space:pre-wrap;
+}
+#labContainer{
+margin-top:25px;
+}
+
+#scanner{
+font-size:120px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#scanner:hover{
+transform:scale(1.08);
+}
+
+#labText{
+margin-top:20px;
+font-size:1.1rem;
+line-height:1.8;
+white-space:pre-wrap;
+}
+#comfortContainer{
+margin-top:25px;
+}
+
+#teddy{
+font-size:120px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#teddy:hover{
+transform:scale(1.08);
+}
+
+#comfortText{
+margin-top:20px;
+font-size:1.1rem;
+line-height:1.8;
+white-space:pre-wrap;
+}
+#mirrorContainer{
+margin-top:25px;
+}
+
+#mirror{
+font-size:120px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#mirror:hover{
+transform:scale(1.08);
+}
+
+#mirrorText{
+margin-top:20px;
+font-size:1.1rem;
+line-height:1.8;
+white-space:pre-wrap;
 }
 .heart{
-position:absolute;
-font-size:20px;
+position:fixed;
 pointer-events:none;
 animation:floatHeart linear infinite;
-opacity:0.6;
+opacity:0.7;
+z-index:1;
+user-select:none;
 }
 
 @keyframes floatHeart{
 
 0%{
-transform:translateY(100vh);
+transform:
+translateY(110vh)
+translateX(0px);
+}
+
+25%{
+transform:
+translateY(75vh)
+translateX(15px);
+}
+
+50%{
+transform:
+translateY(40vh)
+translateX(-15px);
+}
+
+75%{
+transform:
+translateY(0vh)
+translateX(10px);
 }
 
 100%{
-transform:translateY(-120vh);
+transform:
+translateY(-120vh)
+translateX(-10px);
 }
+
+}
+
 .star{
 position:absolute;
-color:white;
 pointer-events:none;
 animation:twinkle linear infinite;
-opacity:0.8;
 }
 
 @keyframes twinkle{
@@ -98,35 +233,26 @@ opacity:0.2;
 }
 
 }
-.title{
-font-size:2rem;
-margin-bottom:20px;
-}
-
-.troggy{
-font-size:80px;
-margin-bottom:20px;
-}
-
-#chapterContent{
-font-size:1.2rem;
-line-height:1.8;
-}
 
 </style>
-
 </head>
+
 <body>
 
 <div id="loginScreen" class="screen">
 
 <h1>YEAR ONE</h1>
 
-<p>A private adventure awaits...</p>
+<p>A Private Adventure</p>
 
-<input id="username" placeholder="Enter your name">
+<input
+id="username"
+placeholder="Enter your name">
 
-<input id="password" type="password" placeholder="Password">
+<input
+id="password"
+type="password"
+placeholder="Password">
 
 <button onclick="login()">
 ENTER
@@ -140,15 +266,53 @@ ENTER
 
 <div class="chapter">
 
-<div class="troggy">
+<div id="troggyEmoji" class="troggy">
 🍦
 </div>
 
-<<h1 id="chapterTitle"></h1>
+<h1 id="chapterTitle"></h1>
 
 <div id="chapterContent"></div>
 
-<div>
+<div id="moonContainer" class="hidden">
+
+<div id="moon" onclick="moonClick()">
+🌙
+</div>
+
+<p id="moonText"></p>
+
+</div>
+
+<div id="labContainer" class="hidden">
+
+<div id="scanner" onclick="labClick()">
+🧪
+</div>
+
+<p id="labText"></p>
+
+</div>
+<div id="comfortContainer" class="hidden">
+
+<div id="teddy" onclick="comfortClick()">
+🧸
+</div>
+
+<p id="comfortText"></p>
+
+</div>
+<div id="mirrorContainer" class="hidden">
+
+<div id="mirror" onclick="mirrorClick()">
+🪞
+</div>
+
+<p id="mirrorText"></p>
+
+</div>
+</div>
+<br>
 
 <button onclick="previousChapter()">
 ⬅ Back
@@ -162,15 +326,13 @@ Continue →
 
 </div>
 
-</div>
-
 <script>
-
-const chapters = [
+ const chapters = [
 
 {
 title:"Troggy Vanillo",
 theme:"#10192b",
+troggy:"🍦",
 content:`
 Oh. It's you.
 
@@ -199,6 +361,7 @@ It's nice to finally meet the legendary Troy.
 {
 title:"Happy One Year Anniversary",
 theme:"#3b0000",
+troggy:"🍦",
 content:`
 HAPPY ONE YEAR ANNIVERSARY
 
@@ -211,104 +374,411 @@ MY DEAR IDIOT PICCHI ❤️
 {
 title:"Letter",
 theme:"#0d1730",
+troggy:"🍦",
 content:`
-[VALENTINE LETTER COMING SOON]
+[VALENTINE LETTER WILL GO HERE]
 `
 },
+
 
 {
 title:"50 Reasons Why I Love You",
-theme:"#b7b4ff",
+theme:"#120204",
+troggy:"🍦",
 content:`
-[50 REASONS WILL GO HERE]
+50 Reasons Why I Love You
+
+1. Ur personality
+
+2. Ur eyes
+
+3. Ur voice
+
+4. Ur smile
+
+5. Ur idiotness
+
+6. Ur giggles and laugh..omg..i love em sm vhai..i cant explain..its jst so cute..omg…mashallah
+
+7. The way ure w me through everyhing
+
+8. The way ure so patient
+
+9. The way u can make people comfty w u
+
+10. Ur friendliness
+
+11. Ur LOYALITY
+
+12. Ur drunk self
+
+13. Ur mischeviousness
+
+14. Ur protectiveness and so firkin much caring side
+
+15. Ur stubbornness
+
+16. Ur encouragement
+
+17. Ur supportiveness
+
+18. Ur flirting side
+
+19. Ur letting me know stuff side
+
+20. Ur cute baby boy side
+
+21. Ur HANDSOME FACE
+
+22. Ur looks
+
+23. Ur hair
+
+24. Ur fashion sense
+
+25. The way ure literally my soulmate
+
+26. How u understand me sm
+
+27. How u know everything before even I say it
+
+28. How ure w me though everything..and how u plan for the future... and omg..i love it sm...when u jst make plan for future and w me...idk..it jst..fees so..comfty..and lovable..
+
+29. How u can easily make people so comfty w u
+
+30. How ure so kind…and how u can make someone’s day million times brighter by jst exsisting..
+
+31. Ur illogical logics
+
+32. The way ure so persistent
+
+33. The way ure so determined
+
+34. The way u acted during in probation period and during at that time
+
+35. Ur drama king side
+
+36. Ur sassy side reee
+
+37. Ur clumsy self [that cute bt that make me so worried]
+
+38. Ur golden retriever side
+
+39. Ur dedication side and how u help everyone
+
+40. Ur voice..ik again but bro….omg..idk..tor voice r moddhe magic ase..amk ekdom..shesh kre dey…
+
+41. Tor big brain side
+
+42. The way u handle all my tantrums
+
+43. The way u handle my stubbornness
+
+44. The way u handle my clumsy self
+
+45. The way u handle my sickness
+
+46. The way u jst handle me
+
+47. Ur kitchen disaster side
+
+48. Ur autisticness
+
+49. The way u make people’s mood bright instantly
+
+50. In one kotha…I just love everything bout u …I love u a lot idiot …a lot re..onk..
+
+❤️
+
+End of the list.
+
+Or is it?...
+
+Coz it can never rlly end...
+
+Coz u idiot made me love everything bout u...
+
+And even after writing this list...
+
+I still feel like millions of reasons r missing.
 `
 },
-
 {
 title:"The Moon",
 theme:"#000000",
+troggy:"🍦",
 content:`
-The moon is beautiful, isn't it, Troy?
+I've got something to show you.
 
-[MOON PAGE CONTENT]
+Click the moon.
 `
 },
 
 {
 title:"Rest Stop",
 theme:"#ffc7d8",
+troggy:"🍦",
 content:`
+Hey.
+
 Take some water.
 
 Take some ice cream.
 
-You've come far.
+You've come pretty far.
+
+Wanna continue?
 `
 },
 
 {
 title:"Gaming Memories",
 theme:"#32104d",
+troggy:"🍦",
 content:`
-[GAMING MEMORIES COMING SOON]
+Gaming Memories
+
+Remember when I used to die in Ninety Nine Nights coz I was a newbie and didnt had any idea abt my food scale and used to die?
+
+😭
+
+And remember when I used to constantly die in Ninety Nine Nights???
+
+And yall used to save me?
+
+💀
+
+Remember when yall used to help me with Blox Fruits?
+
+Coz I had absolutely no idea what I was doing.
+
+😭
+
+Remember when we used to play Midnight Chasers and we used to drive together?
+
+🚗
+
+Remember my driving skills and ur dramatic reactions?
+
+💀
+
+Remember when u took vid of my driving and shared it in gc?
+
+The betrayal.
+
+😭
+
+Remember when we played badminton together and u sadly...
+
+sadly for me...
+
+used to win matches?
+
+😔
+
+Remember the fun we all had playing together?
+
+Or jst playing u and me?and our online dates??
+
+❤️
+
+Those were some of my favorite memories.
+
+And I cant wait to make a lot more memories w u, idiot.
 `
 },
 
-{
-title:"Things You Don't Notice",
-theme:"#5d8abf",
-content:`
-[COMING SOON]
-`
-},
 
-{
-title:"Troy Statistics",
-theme:"#0a0a0a",
-content:`
-Relationship Duration: 365 Days
 
-Loveability: 100%
-
-Idiocy: Extreme
-`
-},
 
 {
 title:"Comfort Room",
 theme:"#f5d66e",
+troggy:"🧸",
 content:`
-[COMFORT ROOM CONTENT]
+Hey.
+
+I've got something for you.
+
+Click the teddy bear.
 `
 },
 
 {
 title:"What I Thought Of You",
 theme:"#4a4e91",
+troggy:"🍦",
 content:`
-[COMING SOON]
+What I Thought Of You
+
+Yk...
+
+when I first met u...
+
+no no...
+
+even before that...
+
+when I used to hear bout u...from alif
+
+I used to think that...
+
+this guy is so...
+
+idk...
+
+funny...
+
+and diff...
+
+Idk him...
+
+I jst hear stories abt him...
+
+but I felt a rlly deep connection w him.
+
+Then the day I first met u...
+
+I knew.
+
+I jst knew.
+
+Ud make a diff in my life.
+
+I still dk how I knew...
+
+but I knew.
+
+Je ai pola amr life e ekta diff part play krbe.
+
+Ai pola amr life diff krbe.
+
+Ai pola amr life cng krbe.
+
+And u did.
+
+U healed me.
+
+U became someone so damn important to me.
+
+I was afraid of love...
+
+and u were there.
+
+Patiently.
+
+U never forced anything w me.
+
+U never made me uncomfortable.
+
+I rlly am glad for that.
+
+Ure jst what I needed vhai.
+
+Then when we were frnds...
+
+I was like...
+
+omg.
+
+I rlly love this guy.
+
+But I cant admit it.
+
+Omg...
+
+I'm falling for him?
+
+But I cant fall.
+
+I promised myself never to enter love.
+
+But I couldn't stop myself falling for u.
+
+And I was like...
+
+its jst a crush.
+
+It will get over.
+
+But no.
+
+As days passed by...
+
+and I spent more time w u...
+
+I started to fall for u more and more and more.
+
+But I thought u liked another person.
+
+So I tried to kill my feelings.
+
+So many times.
+
+But every time I tried...
+
+u jst made me fall more.
+
+And then...
+
+after so much kahini...
+
+and everything...
+
+we finally confessed.
+
+And no...
+
+turns out I wasn't the only one hopelessly falling in love.
+
+YAYAYAYYYY ❤️
+
+That was the best day in my life.
+
+19 June.
+
+And congrats...
+
+we're in another 19 June now.
+
+Together.
+
+For one year.
+
+I love u.
+
+Idiottt ❤️
 `
 },
 
 {
 title:"Mirror Page",
 theme:"#243852",
+troggy:"🪞",
 content:`
-[COMING SOON]
+Hey idiot...
+
+I've got something to show you.
+
+Click the mirror.
 `
 },
 
 {
 title:"Laboratory Of Troy",
 theme:"#1f1f2f",
+troggy:"🧪",
 content:`
-Scientific analysis in progress...
+Welcome to the Laboratory Of Troy.
+
+Click the scanner.
 `
 },
 
 {
 title:"If I Could Pause One Moment",
 theme:"#081120",
+troggy:"🍦",
 content:`
 If I could pause one moment...
 
@@ -319,16 +789,74 @@ I'd choose one with you in it.
 {
 title:"Look How Far You've Come",
 theme:"#141f3f",
+troggy:"🍦",
 content:`
-You've come pretty far.
+Look How Far You've Come
 
-Kinda like you two.
+Hey.
+
+Remember us one year ago?
+
+Two idiots.
+
+Completely unaware of what was coming.
+
+And now look at us.
+
+We've laughed together.
+
+Played together.
+
+Fought.
+
+Made up.
+
+Stayed.
+
+Cried.
+
+Smiled.
+
+And somehow...
+
+through all of it...
+
+we're still here.
+
+One year later.
+
+Together.
+
+And honestly?
+
+I'd choose you all over again.
+
+Every single time.
+
+❤️
+
+This was only Year One.
+
+There r still more memories to make.
+
+More games to play.
+
+More laughs to laugh.
+
+More things to do w u.
+
+So...
+
+thank u.
+
+For being my most fav idiot.
 `
 },
 
 {
 title:"To Be Continued...",
 theme:"#050b1f",
+troggy:"🍦",
 content:`
 This isn't the end.
 
@@ -341,49 +869,10 @@ Year Two Loading...
 ];
 
 let currentChapter = 0;
-
-function login(){
-
-const user =
-document.getElementById("username")
-.value
-.toLowerCase()
-.trim();
-
-const pass =
-document.getElementById("password")
-.value
-.toLowerCase()
-.trim();
-
-const validUsers = [
-"troy",
-"shahariar",
-"shahariar kabir troy"
-];
-
-if(
-validUsers.includes(user)
-&&
-pass === "19 june"
-){
-
-document.getElementById("loginScreen")
-.classList.add("hidden");
-
-document.getElementById("chapterScreen")
-.classList.remove("hidden");
-
-loadChapter();
-
-}else{
-
-document.getElementById("error")
-.innerText =
-"ACCESS DENIED. THIS IS NOT YOUR STORY.";
-}
-
-}
+moonStep = 0;
+labStep = 0;
+comfortStep = 0;
+mirrorStep = 0;
 function createHearts(){
 
 document
@@ -397,21 +886,24 @@ document.createElement("div");
 
 heart.className = "heart";
 
-heart.innerHTML = "❤";
+heart.innerHTML =
+Math.random() > 0.5 ? "♥" : "♡";
 
 heart.style.left =
 Math.random()*100 + "vw";
+heart.style.top =
+Math.random()*100 + "vh";
+heart.style.fontSize =
+(12 + Math.random()*10) + "px";
 
 heart.style.animationDuration =
-(5 + Math.random()*8) + "s";
-
-heart.style.fontSize =
-(10 + Math.random()*20) + "px";
+(10 + Math.random()*5) + "s";
 
 heart.style.color =
 ["#ff0033","#cc0033","#990022","#ff3366"]
 [Math.floor(Math.random()*4)];
-
+heart.style.opacity =
+0.4 + Math.random()*0.5;
 document.body.appendChild(heart);
 
 }
@@ -443,44 +935,219 @@ star.style.fontSize =
 (8 + Math.random()*12) + "px";
 
 star.style.animationDuration =
-(1 + Math.random()*3) (params) {
-    
-} loadChapter(){
+(1 + Math.random()*3) + "s";
 
-document.body.style.background =
-chapters[currentChapter].theme;
+document.body.appendChild(star);
+
+}
+
+}
+
+function login(){
+
+const user =
+document.getElementById("username")
+.value
+.toLowerCase()
+.trim();
+
+const pass =
+document.getElementById("password")
+.value
+.toLowerCase()
+.trim();
+
+const validUsers = [
+"troy",
+"shahariar",
+"shahariar kabir troy"
+];
+
 if(
-chapters[currentChapter].title
-=== "Happy One Year Anniversary"
+validUsers.includes(user)
+&&
+pass === "19 june"
 ){
 
-createHearts();
+document
+.getElementById("loginScreen")
+.classList.add("hidden");
+
+document
+.getElementById("chapterScreen")
+.classList.remove("hidden");
+
+loadChapter();
 
 }else{
+
+document
+.getElementById("error")
+.innerText =
+"ACCESS DENIED. THIS IS NOT YOUR STORY.";
+
+}
+}
+
+function loadChapter(){
+
+const chapter =
+chapters[currentChapter];
+
+
+moonStep = 0;
+labStep = 0;
+comfortStep = 0;
+mirrorStep = 0;
+document.body.style.background =
+chapter.theme;
+if(chapter.title === "50 Reasons Why I Love You"){
+
+document.body.style.color = "#A00000";
+
+}
+else{
+
+document.body.style.color = "white";
+
+}
+document.getElementById(
+"chapterTitle"
+).innerText =
+chapter.title;
+
+document.getElementById(
+"chapterContent"
+).innerText =
+chapter.content;
+
+document.getElementById(
+"troggyEmoji"
+).innerText =
+chapter.troggy;
 
 document
 .querySelectorAll(".heart")
 .forEach(h=>h.remove());
 
+document
+.querySelectorAll(".star")
+.forEach(s=>s.remove());
+
+if(chapter.title === "The Moon"){
+
+document
+.getElementById("moonContainer")
+.classList.remove("hidden");
+
+document
+.getElementById("moonText")
+.innerText = "";
+
+}else{
+
+document
+.getElementById("moonContainer")
+.classList.add("hidden");
+
 }
-document.getElementById("chapterTitle")
-.innerText =
-chapters[currentChapter].title;
 
-document.getElementById("chapterContent")
-.innerText =
-chapters[currentChapter].content;
+if(chapter.title === "Laboratory Of Troy"){
 
-localStorage.setItem(
-"troyProgress",
-currentChapter
-);
+document
+.getElementById("labContainer")
+.classList.remove("hidden");
+
+document
+.getElementById("labText")
+.innerText = "";
+
+}else{
+
+document
+.getElementById("labContainer")
+.classList.add("hidden");
+
+}
+if(chapter.title === "Comfort Room"){
+
+document
+.getElementById("comfortContainer")
+.classList.remove("hidden");
+
+document
+.getElementById("comfortText")
+.innerText = "";
+
+}else{
+
+document
+.getElementById("comfortContainer")
+.classList.add("hidden");
+
+}
+if(chapter.title === "Mirror Page"){
+
+document
+.getElementById("mirrorContainer")
+.classList.remove("hidden");
+
+document
+.getElementById("mirrorText")
+.innerText = "";
+
+}else{
+
+document
+.getElementById("mirrorContainer")
+.classList.add("hidden");
+
+}
+const heartPages = [
+
+"Happy One Year Anniversary",
+"50 Reasons Why I Love You"
+
+];
+
+if(
+heartPages.includes(
+chapter.title
+)
+){
+
+createHearts();
+
+}
+
+const starPages = [
+
+"Troggy Vanillo",
+"Letter",
+"The Moon",
+"To Be Continued...",
+"Look How Far You've Come"
+
+];
+
+if(
+starPages.includes(
+chapter.title
+)
+){
+
+createStars();
+
+}
 
 }
 
 function nextChapter(){
 
-if(currentChapter < chapters.length - 1){
+if(
+currentChapter <
+chapters.length - 1
+){
 
 currentChapter++;
 
@@ -489,13 +1156,351 @@ loadChapter();
 }
 
 }
+
 function previousChapter(){
 
-if(currentChapter > 0){
+if(
+currentChapter > 0
+){
 
 currentChapter--;
 
 loadChapter();
+
+}
+
+}
+
+function labClick(){
+
+const labText =
+document.getElementById("labText");
+
+labStep++;
+
+if(labStep === 1){
+
+labText.innerText =
+`Scanning Subject...`;
+
+}
+
+else if(labStep === 2){
+
+labText.innerText =
+`Name:
+
+Shahariar Kabir Troy`;
+
+}
+
+else if(labStep === 3){
+
+labText.innerText =
+`Handsome Level:
+
+ERROR
+
+Subject too handsome.
+
+Scale broke.`;
+
+}
+
+else if(labStep === 4){
+
+labText.innerText =
+`Yap Tolerance:
+
+∞`;
+
+}
+
+else if(labStep === 5){
+
+labText.innerText =
+`Patience Level:
+
+Legendary`;
+
+}
+
+else if(labStep === 6){
+
+labText.innerText =
+`Probability Of Being Missed By Me:
+
+SYNTAX ERROR
+
+Subject No. 2 Winter Frost misses Subject No. 1 Troy 24/7.
+
+Amount cannot be counted.`;
+
+}
+
+else if(labStep === 7){
+
+labText.innerText =
+`Number Of Times Mentioned Per Day:
+
+ERROR
+
+VALUE TOO LARGE
+
+Cannot Display.`;
+
+}
+
+else if(labStep === 8){
+
+labText.innerText =
+`Future Husband Probability:
+
+Definitely
+
+1,000,000%`;
+
+}
+
+else if(labStep === 9){
+
+labText.innerText =
+`Amount Loved:
+
+∞`;
+
+}
+
+else if(labStep === 10){
+
+labText.innerText =
+`Final Conclusion:
+
+After extensive testing...
+
+I regret to inform you
+
+that Subject Winter Frost
+
+is hopelessly in love with you.`;
+
+}
+
+}
+
+
+
+
+
+
+function moonClick(){
+
+const moonText =
+document.getElementById("moonText");
+
+moonStep++;
+
+if(moonStep === 1){
+
+moonText.innerText =
+"The moon is beautiful, isn't it, Troy?";
+
+}
+
+else if(moonStep === 2){
+
+moonText.innerText =
+`I've always loved the moon because it looked pretty and magical.
+
+But after you came into my life...
+
+the moon got a completely different meaning.
+
+Now every time I stare at it, it reminds me of you.
+
+It makes me think of you.
+
+And I grin like a fool.`;
+
+}
+
+else if(moonStep === 3){
+
+moonText.innerText =
+`I hope we forever look at the moon together like this...
+
+and enjoy it.`;
+
+}
+
+else if(moonStep === 4){
+
+moonText.innerText =
+`Picchi...
+
+Bairer moon ta onek shundor, na?
+
+Ekdom tor moton.`;
+
+}
+
+else if(moonStep === 5){
+
+moonText.innerText =
+`I love you to the moon and back, Troy.
+
+🌙❤️`;
+
+}
+
+}
+function comfortClick(){
+
+const comfortText =
+document.getElementById("comfortText");
+
+comfortStep++;
+
+if(comfortStep === 1){
+
+comfortText.innerText =
+`Hey...
+
+Idiot.
+
+Come here.
+
+Sit.
+
+Rest for a bit.`;
+
+}
+
+else if(comfortStep === 2){
+
+comfortText.innerText =
+`I know you've been going through a lot these days.
+
+You don't always have to show that you're strong.
+
+Not in front of me at least.`;
+
+}
+
+else if(comfortStep === 3){
+
+comfortText.innerText =
+`Come here.
+
+Lemme give you a hug.`;
+
+}
+
+else if(comfortStep === 4){
+
+comfortText.innerText =
+`I know I ain't the most perfect girlfriend...
+
+but I'm trying to be better.
+
+For you.`;
+
+}
+
+else if(comfortStep === 5){
+
+comfortText.innerText =
+`And...
+
+listen, picchi.
+
+I know you go through a lot of pera and jhamelas.`;
+
+}
+
+else if(comfortStep === 6){
+
+comfortText.innerText =
+`But listen.
+
+Lmk, alr?
+
+Lmk your condition.
+
+Lmk your jhamelas.
+
+Lmk your peras.`;
+
+}
+
+else if(comfortStep === 7){
+
+comfortText.innerText =
+`You don't honestly have to be so strong all the time.`;
+
+}
+
+else if(comfortStep === 8){
+
+comfortText.innerText =
+`When you can't be strong...
+
+I'll be strong for you.`;
+
+}
+
+else if(comfortStep === 9){
+
+comfortText.innerText =
+`Because when I'm here...
+
+you don't have to be strong all the time.
+
+You can just rest sometimes, yk?`;
+
+}
+
+else if(comfortStep === 10){
+
+comfortText.innerText =
+`You...
+
+picchi...
+
+come in my arms.
+
+Ehehehehe.`;
+
+}
+
+else if(comfortStep === 11){
+
+comfortText.innerText =
+`Lemme give you a big warm hug...
+
+for being so strong.
+
+And tysm.
+
+For everything.`;
+
+}
+
+else if(comfortStep === 12){
+
+comfortText.innerText =
+`AND I LOVE U A LOT.
+
+A LOT.
+
+ONK.
+
+IDIOT. 🫂❤️`;
+
+document.getElementById(
+"teddy"
+).innerText =
+"🧸🫂";
 
 }
 
@@ -506,7 +1511,117 @@ currentChapter = 0;
 
 };
 
+function mirrorClick(){
+
+const mirrorText =
+document.getElementById("mirrorText");
+
+mirrorStep++;
+
+if(mirrorStep === 1){
+
+mirrorText.innerText =
+`Hey idiot...
+
+Stop on this one for a while.`;
+
+}
+
+else if(mirrorStep === 2){
+
+mirrorText.innerText =
+`Look in the mirror.`;
+
+}
+
+else if(mirrorStep === 3){
+
+mirrorText.innerText =
+`You've spent this whole adventure looking at how much Winter Frost...
+
+or Mubasshira Tasnim...
+
+loves you.
+
+But I think there's a problem.
+
+I don't think you see yourself the way I do.
+
+You always don't notice your good sides.
+
+But she does.
+
+She sees a guy who's loyal.
+
+Who's kind.
+
+Who's patient.
+
+Who's understanding.
+
+Who's the cutest person alive on Earth...
+
+and on the universe too.
+
+She sees a guy who's so damn handsome.
+
+She sees a guy who took her whole heart.
+
+She sees a guy who listens.
+
+She sees a guy who can make other people's day brighter just by existing.
+
+She sees a guy who makes her feel safe.
+
+And other people feel safe too.
+
+She sees a guy who is the best boyfriend in the universe.
+
+She sees a guy she wants to marry.
+
+A guy she wants to share a home with.
+
+She sees a guy who's hardworking.
+
+She sees a guy who's clumsy.
+
+Cute idiot clumsy.
+
+She sees a guy who can smile and stay so strong through bad times.
+
+She sees a guy who is the best specimen of guys.
+
+And she loves him.
+
+A lot.
+
+More than he probably realizes.
+
+So yeah.
+
+Do not ever you dare think shit about yourself.
+
+Because you really are very admirable.
+
+And so damn strong.
+
+And so kind.
+
+And I admire you a lot.
+
+Wo ai ni, Troy. ❤️`;
+
+document.getElementById(
+"mirror"
+).innerText =
+"🪞❤️";
+
+}
+
+}
+
 </script>
 
 </body>
+
 </html>
