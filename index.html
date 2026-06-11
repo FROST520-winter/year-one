@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Year One</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Pixelify Sans',sans-serif;
+}
+
+body{
+background:#120204;
+color:white;
+overflow:hidden;
+position:relative;
+}
+
+.screen{
+width:100vw;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+padding:30px;
+text-align:center;
+}
+
+.hidden{
+display:none;
+}
+
+input{
+padding:12px;
+margin:10px;
+width:260px;
+border:none;
+border-radius:8px;
+}
+
+button{
+padding:12px 20px;
+margin-top:15px;
+cursor:pointer;
+border:none;
+border-radius:8px;
+}
+
+.chapter{
+max-width:900px;
+}
+.heart{
+position:absolute;
+font-size:20px;
+pointer-events:none;
+animation:floatHeart linear infinite;
+opacity:0.6;
+}
+
+@keyframes floatHeart{
+
+0%{
+transform:translateY(100vh);
+}
+
+100%{
+transform:translateY(-120vh);
+}
+.star{
+position:absolute;
+color:white;
+pointer-events:none;
+animation:twinkle linear infinite;
+opacity:0.8;
+}
+
+@keyframes twinkle{
+
+0%{
+opacity:0.2;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+opacity:0.2;
+}
+
+}
+.title{
+font-size:2rem;
+margin-bottom:20px;
+}
+
+.troggy{
+font-size:80px;
+margin-bottom:20px;
+}
+
+#chapterContent{
+font-size:1.2rem;
+line-height:1.8;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="loginScreen" class="screen">
+
+<h1>YEAR ONE</h1>
+
+<p>A private adventure awaits...</p>
+
+<input id="username" placeholder="Enter your name">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">
+ENTER
+</button>
+
+<p id="error"></p>
+
+</div>
+
+<div id="chapterScreen" class="screen hidden">
+
+<div class="chapter">
+
+<div class="troggy">
+🍦
+</div>
+
+<<h1 id="chapterTitle"></h1>
+
+<div id="chapterContent"></div>
+
+<div>
+
+<button onclick="previousChapter()">
+⬅ Back
+</button>
+
+<button onclick="nextChapter()">
+Continue →
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const chapters = [
+
+{
+title:"Troggy Vanillo",
+theme:"#10192b",
+content:`
+Oh. It's you.
+
+Hello, Troy.
+
+My name is Troggy Vanillo.
+
+I've been assigned to guide you through this journey.
+
+I am unfortunately unpaid.
+
+I've heard quite a lot about you.
+
+Unfortunately, your future wife yaps.
+
+A lot.
+
+And by a lot...
+
+I mean a concerning amount.
+
+It's nice to finally meet the legendary Troy.
+`
+},
+
+{
+title:"Happy One Year Anniversary",
+theme:"#3b0000",
+content:`
+HAPPY ONE YEAR ANNIVERSARY
+
+SHAHARIAR KABIR TROY
+
+MY DEAR IDIOT PICCHI ❤️
+`
+},
+
+{
+title:"Letter",
+theme:"#0d1730",
+content:`
+[VALENTINE LETTER COMING SOON]
+`
+},
+
+{
+title:"50 Reasons Why I Love You",
+theme:"#b7b4ff",
+content:`
+[50 REASONS WILL GO HERE]
+`
+},
+
+{
+title:"The Moon",
+theme:"#000000",
+content:`
+The moon is beautiful, isn't it, Troy?
+
+[MOON PAGE CONTENT]
+`
+},
+
+{
+title:"Rest Stop",
+theme:"#ffc7d8",
+content:`
+Take some water.
+
+Take some ice cream.
+
+You've come far.
+`
+},
+
+{
+title:"Gaming Memories",
+theme:"#32104d",
+content:`
+[GAMING MEMORIES COMING SOON]
+`
+},
+
+{
+title:"Things You Don't Notice",
+theme:"#5d8abf",
+content:`
+[COMING SOON]
+`
+},
+
+{
+title:"Troy Statistics",
+theme:"#0a0a0a",
+content:`
+Relationship Duration: 365 Days
+
+Loveability: 100%
+
+Idiocy: Extreme
+`
+},
+
+{
+title:"Comfort Room",
+theme:"#f5d66e",
+content:`
+[COMFORT ROOM CONTENT]
+`
+},
+
+{
+title:"What I Thought Of You",
+theme:"#4a4e91",
+content:`
+[COMING SOON]
+`
+},
+
+{
+title:"Mirror Page",
+theme:"#243852",
+content:`
+[COMING SOON]
+`
+},
+
+{
+title:"Laboratory Of Troy",
+theme:"#1f1f2f",
+content:`
+Scientific analysis in progress...
+`
+},
+
+{
+title:"If I Could Pause One Moment",
+theme:"#081120",
+content:`
+If I could pause one moment...
+
+I'd choose one with you in it.
+`
+},
+
+{
+title:"Look How Far You've Come",
+theme:"#141f3f",
+content:`
+You've come pretty far.
+
+Kinda like you two.
+`
+},
+
+{
+title:"To Be Continued...",
+theme:"#050b1f",
+content:`
+This isn't the end.
+
+Just the end of Year One.
+
+Year Two Loading...
+`
+}
+
+];
+
+let currentChapter = 0;
+
+function login(){
+
+const user =
+document.getElementById("username")
+.value
+.toLowerCase()
+.trim();
+
+const pass =
+document.getElementById("password")
+.value
+.toLowerCase()
+.trim();
+
+const validUsers = [
+"troy",
+"shahariar",
+"shahariar kabir troy"
+];
+
+if(
+validUsers.includes(user)
+&&
+pass === "19 june"
+){
+
+document.getElementById("loginScreen")
+.classList.add("hidden");
+
+document.getElementById("chapterScreen")
+.classList.remove("hidden");
+
+loadChapter();
+
+}else{
+
+document.getElementById("error")
+.innerText =
+"ACCESS DENIED. THIS IS NOT YOUR STORY.";
+}
+
+}
+function createHearts(){
+
+document
+.querySelectorAll(".heart")
+.forEach(h=>h.remove());
+
+for(let i=0;i<25;i++){
+
+let heart =
+document.createElement("div");
+
+heart.className = "heart";
+
+heart.innerHTML = "❤";
+
+heart.style.left =
+Math.random()*100 + "vw";
+
+heart.style.animationDuration =
+(5 + Math.random()*8) + "s";
+
+heart.style.fontSize =
+(10 + Math.random()*20) + "px";
+
+heart.style.color =
+["#ff0033","#cc0033","#990022","#ff3366"]
+[Math.floor(Math.random()*4)];
+
+document.body.appendChild(heart);
+
+}
+
+}
+
+function createStars(){
+
+document
+.querySelectorAll(".star")
+.forEach(s=>s.remove());
+
+for(let i=0;i<60;i++){
+
+let star =
+document.createElement("div");
+
+star.className = "star";
+
+star.innerHTML = "✦";
+
+star.style.left =
+Math.random()*100 + "vw";
+
+star.style.top =
+Math.random()*100 + "vh";
+
+star.style.fontSize =
+(8 + Math.random()*12) + "px";
+
+star.style.animationDuration =
+(1 + Math.random()*3) (params) {
+    
+} loadChapter(){
+
+document.body.style.background =
+chapters[currentChapter].theme;
+if(
+chapters[currentChapter].title
+=== "Happy One Year Anniversary"
+){
+
+createHearts();
+
+}else{
+
+document
+.querySelectorAll(".heart")
+.forEach(h=>h.remove());
+
+}
+document.getElementById("chapterTitle")
+.innerText =
+chapters[currentChapter].title;
+
+document.getElementById("chapterContent")
+.innerText =
+chapters[currentChapter].content;
+
+localStorage.setItem(
+"troyProgress",
+currentChapter
+);
+
+}
+
+function nextChapter(){
+
+if(currentChapter < chapters.length - 1){
+
+currentChapter++;
+
+loadChapter();
+
+}
+
+}
+function previousChapter(){
+
+if(currentChapter > 0){
+
+currentChapter--;
+
+loadChapter();
+
+}
+
+}
+window.onload = () => {
+
+currentChapter = 0;
+
+};
+
+</script>
+
+</body>
+</html>
