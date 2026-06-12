@@ -233,6 +233,19 @@ opacity:0.2;
 }
 
 }
+.firefly,
+.gaming,
+.restDecor,
+.mirrorDecor,
+.comfortDecor{
+
+position:fixed;
+pointer-events:none;
+opacity:0.7;
+animation:floatHeart linear infinite;
+z-index:1;
+
+}
 
 </style>
 </head>
@@ -265,7 +278,7 @@ ENTER
 <div id="chapterScreen" class="screen hidden">
 
 <div class="chapter">
-
+<p id="progress"></p>
 <div id="troggyEmoji" class="troggy">
 🍦
 </div>
@@ -379,7 +392,6 @@ content:`
 [VALENTINE LETTER WILL GO HERE]
 `
 },
-
 
 {
 title:"50 Reasons Why I Love You",
@@ -587,7 +599,6 @@ Those were some of my favorite memories.
 And I cant wait to make a lot more memories w u, idiot.
 `
 },
-
 
 
 
@@ -863,7 +874,43 @@ This isn't the end.
 Just the end of Year One.
 
 Year Two Loading...
+
+❤️
+
+Created By:
+
+Mubasshira Tasnim
+
+For:
+
+Shahariar Kabir Troy
+
+Special Thanks To:
+
+Moon Watching
+
+Roblox
+
+Midnight Chasers
+
+Badminton
+
+Online Dates
+
+Yapping
+
+Bad Driving
+
+And one very lovable idiot.
+
+❤️
+
+Thank you for staying.
+
+See you in Year Two.
 `
+
+
 }
 
 ];
@@ -942,6 +989,202 @@ document.body.appendChild(star);
 }
 
 }
+function createFireflies(){
+
+document
+.querySelectorAll(".firefly")
+.forEach(f=>f.remove());
+
+for(let i=0;i<35;i++){
+
+let firefly =
+document.createElement("div");
+
+firefly.className = "firefly";
+
+const emojis = ["🌼","❄️","💐"];
+
+firefly.innerHTML =
+emojis[
+Math.floor(
+Math.random()*emojis.length
+)
+];
+
+firefly.style.left =
+Math.random()*100 + "vw";
+
+firefly.style.top =
+Math.random()*100 + "vh";
+
+firefly.style.fontSize =
+(22 + Math.random()*18) + "px";
+
+firefly.style.animationDuration =
+(5 + Math.random()*5) + "s";
+
+document.body.appendChild(firefly);
+
+}
+
+}
+function createGamingDecor(){
+
+document
+.querySelectorAll(".gaming")
+.forEach(g=>g.remove());
+
+const emojis = ["🦌","🚗","🏸"];
+
+for(let i=0;i<30;i++){
+
+let item =
+document.createElement("div");
+
+item.className = "gaming";
+
+item.innerHTML =
+emojis[
+Math.floor(
+Math.random()*emojis.length
+)
+];
+
+item.style.left =
+Math.random()*100 + "vw";
+
+item.style.top =
+Math.random()*100 + "vh";
+
+item.style.fontSize =
+(20 + Math.random()*20) + "px";
+
+item.style.animationDuration =
+(8 + Math.random()*6) + "s";
+
+document.body.appendChild(item);
+
+}
+
+}
+function createRestDecor(){
+
+document
+.querySelectorAll(".restDecor")
+.forEach(r=>r.remove());
+
+const emojis = ["🌸"];
+
+for(let i=0;i<30;i++){
+
+let item =
+document.createElement("div");
+
+item.className = "restDecor";
+
+item.innerHTML =
+emojis[
+Math.floor(
+Math.random()*emojis.length
+)
+];
+
+item.style.left =
+Math.random()*100 + "vw";
+
+item.style.top =
+Math.random()*100 + "vh";
+
+item.style.fontSize =
+(18 + Math.random()*20) + "px";
+
+item.style.animationDuration =
+(8 + Math.random()*6) + "s";
+
+document.body.appendChild(item);
+
+}
+
+}
+
+function createComfortDecor(){
+
+document
+.querySelectorAll(".comfortDecor")
+.forEach(c=>c.remove());
+
+const emojis = ["💘","💖","💝","💓","💗","💞","💕"];
+
+for(let i=0;i<40;i++){
+
+let item =
+document.createElement("div");
+
+item.className = "comfortDecor";
+
+item.innerHTML =
+emojis[
+Math.floor(
+Math.random()*emojis.length
+)
+];
+
+item.style.left =
+Math.random()*100 + "vw";
+
+item.style.top =
+Math.random()*100 + "vh";
+
+item.style.fontSize =
+(10 + Math.random()*10) + "px";
+
+item.style.animationDuration =
+(8 + Math.random()*6) + "s";
+
+document.body.appendChild(item);
+
+}
+}
+function createMirrorDecor(){
+
+document
+.querySelectorAll(".mirrorDecor")
+.forEach(m=>m.remove());
+
+const emojis = ["🎀","⭐"];
+
+
+for(let i=0;i<40;i++){
+
+let item =
+document.createElement("div");
+
+item.className = "mirrorDecor";
+
+item.innerHTML =
+emojis[
+Math.floor(
+Math.random()*emojis.length
+)
+];
+
+item.style.left =
+Math.random()*100 + "vw";
+
+item.style.top =
+Math.random()*100 + "vh";
+
+item.style.fontSize =
+(12 + Math.random()*18) + "px";
+
+item.style.animationDuration =
+(8 + Math.random()*6) + "s";
+
+document.body.appendChild(item);
+
+}
+
+}
 
 function login(){
 
@@ -993,12 +1236,15 @@ function loadChapter(){
 
 const chapter =
 chapters[currentChapter];
-
+document.getElementById("progress").innerText =
+`Chapter ${currentChapter + 1} / ${chapters.length}`;
 
 moonStep = 0;
 labStep = 0;
 comfortStep = 0;
 mirrorStep = 0;
+document.getElementById("teddy").innerText = "🧸";
+document.getElementById("mirror").innerText = "🪞";
 document.body.style.background =
 chapter.theme;
 if(chapter.title === "50 Reasons Why I Love You"){
@@ -1033,6 +1279,26 @@ document
 document
 .querySelectorAll(".star")
 .forEach(s=>s.remove());
+
+document
+.querySelectorAll(".firefly")
+.forEach(f=>f.remove());
+
+document
+.querySelectorAll(".gaming")
+.forEach(g=>g.remove());
+
+document
+.querySelectorAll(".restDecor")
+.forEach(r=>r.remove());
+
+document
+.querySelectorAll(".comfortDecor")
+.forEach(c=>c.remove());
+
+document
+.querySelectorAll(".mirrorDecor")
+.forEach(m=>m.remove());
 
 if(chapter.title === "The Moon"){
 
@@ -1103,11 +1369,10 @@ document
 .classList.add("hidden");
 
 }
-const heartPages = [
 
+const heartPages = [
 "Happy One Year Anniversary",
 "50 Reasons Why I Love You"
-
 ];
 
 if(
@@ -1115,19 +1380,15 @@ heartPages.includes(
 chapter.title
 )
 ){
-
 createHearts();
-
 }
 
 const starPages = [
-
 "Troggy Vanillo",
 "Letter",
 "The Moon",
 "To Be Continued...",
 "Look How Far You've Come"
-
 ];
 
 if(
@@ -1135,9 +1396,27 @@ starPages.includes(
 chapter.title
 )
 ){
-
 createStars();
+}
 
+if(chapter.title === "Rest Stop"){
+createRestDecor();
+}
+if(chapter.title === "Comfort Room"){
+createComfortDecor();
+}
+if(chapter.title === "Gaming Memories"){
+createGamingDecor();
+}
+
+if(
+chapter.title === "What I Thought Of You"
+){
+createFireflies();
+}
+
+if(chapter.title === "Mirror Page"){
+createMirrorDecor();
 }
 
 }
@@ -1287,7 +1566,6 @@ is hopelessly in love with you.`;
 }
 
 }
-
 
 
 
@@ -1509,6 +1787,8 @@ window.onload = () => {
 
 currentChapter = 0;
 
+createStars();
+
 };
 
 function mirrorClick(){
@@ -1625,3 +1905,4 @@ document.getElementById(
 </body>
 
 </html>
+
